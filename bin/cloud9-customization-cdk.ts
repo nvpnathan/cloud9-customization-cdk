@@ -5,9 +5,10 @@ import { Cloud9CustomizationCdkStack } from "../lib/cloud9-customization-cdk-sta
 
 const app = new cdk.App();
 new Cloud9CustomizationCdkStack(app, "Cloud9CustomizationCdkStack", {
-  synthesizer: new cdk.DefaultStackSynthesizer({
-    generateBootstrapVersionRule: false,
-  }),
+  env: {
+    region: process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION,
+    account: process.env.AWS_ACCOUNT_ID,
+  },
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */

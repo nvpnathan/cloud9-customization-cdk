@@ -69,25 +69,25 @@ export class Cloud9CustomizationCdkStack extends cdk.Stack {
       }
     );
 
-    const vpc = new ec2.Vpc(this, "VPC", {
-      maxAzs: 2,
-      ipAddresses: ec2.IpAddresses.cidr("10.23.0.0/16"),
-      natGateways: 1,
-      subnetConfiguration: [
-        {
-          subnetType: ec2.SubnetType.PUBLIC,
-          name: "Public",
-          cidrMask: 18,
-        },
-        {
-          subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
-          name: "Private",
-          cidrMask: 18,
-        },
-      ],
-    });
+    // const vpc = new ec2.Vpc(this, "VPC", {
+    //   maxAzs: 2,
+    //   ipAddresses: ec2.IpAddresses.cidr("10.23.0.0/16"),
+    //   natGateways: 1,
+    //   subnetConfiguration: [
+    //     {
+    //       subnetType: ec2.SubnetType.PUBLIC,
+    //       name: "Public",
+    //       cidrMask: 18,
+    //     },
+    //     {
+    //       subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
+    //       name: "Private",
+    //       cidrMask: 18,
+    //     },
+    //   ],
+    // });
 
-    // const vpc = ec2.Vpc.fromLookup(this, "DefaultVPC", { isDefault: true });
+    const vpc = ec2.Vpc.fromLookup(this, "DefaultVPC", { isDefault: true });
 
     const instanceRole = new iam.Role(this, "WorkspaceInstanceRole", {
       assumedBy: new iam.ServicePrincipal("ec2.amazonaws.com"),

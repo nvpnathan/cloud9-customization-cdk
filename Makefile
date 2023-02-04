@@ -1,4 +1,4 @@
-C9_ROLE_ARN ?= arn:aws:sts::758938277263:assumed-role/Admin/umishaq-Isengard
+include .env
 
 .PHONY: clean
 clean:
@@ -13,19 +13,14 @@ build:
 
 .PHONY: synth
 synth: build
-	npx cdk synth EcsWorkshopCloud9Stack --no-path-metadata
+	npx cdk synth Cloud9CustomizationCdkStack --no-path-metadata
 
 .PHONY: deploy
 deploy: synth
-	npx cdk deploy EcsWorkshopCloud9Stack --require-approval=never \
+	npx cdk deploy Cloud9CustomizationCdkStack --require-approval=never \
 		--previous-parameters=false \
-
-.PHONY: zeploy
-zeploy: synth
-	npx cdk deploy EcsWorkshopCloud9Stack --require-approval=never \
-		--previous-parameters=false \
-		--parameters EcsWorkshopCloud9Stack:EETeamRoleArn=$(C9_ROLE_ARN)
+		--parameters Cloud9CustomizationCdkStack:WorkspaceOwnerRoleArn=$(C9_ROLE_ARN)
 
 .PHONY: destroy
 destroy:
-	npx cdk destroy EcsWorkshopCloud9Stack --force
+	npx cdk destroy Cloud9CustomizationCdkStack --force

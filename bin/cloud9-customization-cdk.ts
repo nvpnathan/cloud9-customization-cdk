@@ -1,10 +1,13 @@
 #!/usr/bin/env node
-import 'source-map-support/register';
-import * as cdk from 'aws-cdk-lib';
-import { Cloud9CustomizationCdkStack } from '../lib/cloud9-customization-cdk-stack';
+import * as cdk from "aws-cdk-lib";
+import "source-map-support/register";
+import { Cloud9CustomizationCdkStack } from "../lib/cloud9-customization-cdk-stack";
 
 const app = new cdk.App();
-new Cloud9CustomizationCdkStack(app, 'Cloud9CustomizationCdkStack', {
+new Cloud9CustomizationCdkStack(app, "Cloud9CustomizationCdkStack", {
+  synthesizer: new cdk.DefaultStackSynthesizer({
+    generateBootstrapVersionRule: false,
+  }),
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */

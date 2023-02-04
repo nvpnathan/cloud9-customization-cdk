@@ -13,7 +13,7 @@ build:
 
 .PHONY: synth
 synth: build
-	npx cdk synth Cloud9CustomizationCdkStack --no-path-metadata
+	npx cdk synth Cloud9CustomizationCdkStack
 
 .PHONY: deploy
 deploy: synth

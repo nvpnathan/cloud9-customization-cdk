@@ -31,7 +31,7 @@ phases:
       - 'export AWS_ACCOUNT_ID=$(echo $CODEBUILD_BUILD_ARN | cut -d: -f5)'
       - 'echo "AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID"'
       - 'echo "CLOUD9_OWNER_ARN: $CLOUD9_OWNER_ARN"'
-      - 'npx cdk deploy Cloud9CustomizationCdkStack --require-approval=never --parameters Cloud9CustomizationCdkStack:WorkspaceOwnerRoleArn=$(CLOUD9_OWNER_ARN)'
+      - npx cdk deploy Cloud9CustomizationCdkStack --require-approval=never --parameters Cloud9CustomizationCdkStack:WorkspaceOwnerRoleArn=$CLOUD9_OWNER_ARN
   post_build:
     on-failure: ABORT
     commands:

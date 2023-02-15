@@ -115,8 +115,8 @@ export class Cloud9CustomizationCdkStack extends cdk.Stack {
     const workspace = new cloud9.Ec2Environment(this, "Workspace", {
       imageId: cloud9.ImageId.AMAZON_LINUX_2,
       vpc: vpc,
-      ec2EnvironmentName: "ecs-blueprints-workshop",
-      description: "ECS Blueprints Workshop",
+      ec2EnvironmentName: "serverless-first-workshop",
+      description: "Serverless First Workshop",
       instanceType: ec2.InstanceType.of(
         ec2.InstanceClass.T3,
         ec2.InstanceSize.MEDIUM
